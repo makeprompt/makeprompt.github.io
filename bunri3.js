@@ -37,7 +37,7 @@ function tagadds(prompts){
 // Sortableの実装>
 $(function() {
     // リストを並べ替え可能に
-    $('#sortable').sortable({
+    $('#addtagbody').sortable({
       // updateで並べ替えるたびに更新
       update: function(){
        jumontukuru()
