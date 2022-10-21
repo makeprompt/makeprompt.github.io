@@ -43,6 +43,10 @@ $(function() {
        jumontukuru()
       }
     });
+    $('#addtagbody').draggable({
+        // 追加先のリストid
+        connectToSortable: '#addtagbody'
+      });
   });
 
 function jumontukuru (){
