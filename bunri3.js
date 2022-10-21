@@ -48,7 +48,15 @@ $(function() {
         connectToSortable: '#addtagbody'
       });
   });
-
+// Sortableの実装->ソート後に追加動作しないタイプ
+$(function() {
+    // リストを並べ替え可能に
+    $('#sortable_table').sortable();
+    $('#sortable_table').draggable({
+        // 追加先のリストid
+        connectToSortable: '#sortable_table'
+      });
+  });
 function jumontukuru (){
     var itemIDs ='';
     // Novelai、SDWU記法の選択

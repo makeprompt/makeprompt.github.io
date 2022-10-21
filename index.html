@@ -94,6 +94,7 @@
                 <li class="mb-1" id="cum"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#cum-collapse" aria-expanded="false">射精</button><div class="collapse" id="cum-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
                 <li class="mb-1" id="userset"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#userset-collapse" aria-expanded="false">ユーザー定義</button><div class="collapse" id="userset-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
               </ul>
+              <a href="./tags.html" target="_blank"><button class="btn btn-primary me-2">Taglist編集</button></a>
               <!-- side -->
             </div>
           </div>
@@ -121,21 +122,25 @@
         <!-- main end -->
       <hr>
       <h5>作成済みPrompts編集</h5>
+      <p></p>
       <button id="downloadTSV" class="btn btn-primary me-2">PromptsをJSONで保存</button>
-      <button id="saveLocalstorage" class="btn btn-primary me-2">Promptsをローカルストレージに保存</button>
+      <button id="saveLocalstorage" class="btn btn-primary me-2">Promptsをキャッシュに保存</button>
       <div id="prompts_ex"></div>
-      <table class="table table-striped" id="prompts_ex">
-        <thead>
-          <th>Prompts</th>
-          <th>Name</th>
-          <th>Undesired Content</th>
-          <th>削除</th>
-        </thead>
-        <tbody id="promptsbody">
+        <table class="table table-striped" id="prompts_ex">
+          <thead>
+            <th>Prompts</th>
+            <th>Name</th>
+            <th>Undesired Content</th>
+            <th>削除</th>
+          </thead>
+          <tbody id="promptsbody">
 
-        </tbody>
-      </table>
+          </tbody>
+        </table>
       </div>
+      <hr>
+      <h5>使い方</h5>
+      初回アクセス時にTaglistをキャッシュに読み込み、次回からはそのリストを利用します。Taglist編集のボタンから編集画面に入ることができますのでガンガン追加してJSONで共有してください。      
     </div>
   </div>
 
@@ -155,9 +160,9 @@ $('#testcode').click(function () {
 $('#copytopro').click(function () {
     pr = document.getElementById('log').value
     addprompts_html = `          <tr>
-            <td><input type="text" value="`+pr+`" class="prompt"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">↑</button></td>
+            <td><input type="text" value="`+pr+`" class="prompt"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">タグ編集</button></td>
             <td><input type="text" value="`+''+`" class="dec"></td>
-            <td><input type="text" value="`+''+`" class="UC"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">↑</button></td>
+            <td><input type="text" value="`+''+`" class="UC"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">タグ編集</button></td>
             <td><button class="btn .btn-info" id="x_button">x</button></td>
           </tr>`
       $('#promptsbody').append(addprompts_html)
@@ -167,7 +172,7 @@ $('#downloadTSV').click(function () {
     makejson()
 })
 function maketsv(){
-    output_tsc ='Prompts\tName\tUC\n'
+    output_tsv ='Prompts\tName\tUC\n'
     $('#promptsbody tr').map(function() {
         // console.log($(this))
         // ij = $(this).find('.counter1').val();
@@ -176,15 +181,15 @@ function maketsv(){
         pw = $(this).find('input')[0].value;
         de = $(this).find('input')[1].value;
         uc = $(this).find('input')[2].value;
-        output_tsc += pw+'\t'+de+'\t'+uc+'\n'
+        output_tsv += pw+'\t'+de+'\t'+uc+'\n'
     });
-    // console.log(output_tsc)
+    // console.log(output_tsv)
     //ダウンロードするCSVファイル名を指定する
     const filename = "prompts.tsv";
     //BOMを付与する（Excelでの文字化け対策）
     const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
     //Blobでデータを作成する
-    const blob = new Blob([bom, output_tsc], { type: "text/csv" });
+    const blob = new Blob([bom, output_tsv], { type: "text/csv" });
 
     //IE10/11用(download属性が機能しないためmsSaveBlobを使用）
     if (window.navigator.msSaveBlob) {
@@ -206,7 +211,7 @@ function maketsv(){
     }
 }
 function makejson(){
-    output_tsc =[]
+    output_tsv =[]
     $('#promptsbody tr').map(function() {
         // console.log($(this))
         // ij = $(this).find('.counter1').val();
@@ -215,19 +220,18 @@ function makejson(){
         pw = $(this).find('input')[0].value;
         de = $(this).find('input')[1].value;
         uc = $(this).find('input')[2].value;
-        output_tsc.push({
+        output_tsv.push({
             Prompt:pw,
             Name:de,
             UC:uc
         })
     });
-    // console.log(output_tsc)
+    // console.log(output_tsv)
     //ダウンロードするCSVファイル名を指定する
     const filename = "prompts.json";
-    //BOMを付与する（Excelでの文字化け対策）
-    // const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
+
     //Blobでデータを作成する
-    const blob = new Blob([JSON.stringify(output_tsc)], { type: "text/csv" });
+    const blob = new Blob([JSON.stringify(output_tsv)], { type: "text/csv" });
 
     //IE10/11用(download属性が機能しないためmsSaveBlobを使用）
     if (window.navigator.msSaveBlob) {
@@ -252,7 +256,7 @@ $('#saveLocalstorage').click(function () {
     savelocalstorage()
 })
 function savelocalstorage(){
-    output_tsc = []
+    output_tsv = []
     $('#promptsbody tr').map(function() {
         // console.log($(this))
         // ij = $(this).find('.counter1').val();
@@ -261,16 +265,16 @@ function savelocalstorage(){
         pw = $(this).find('input')[0].value;
         de = $(this).find('input')[1].value;
         uc = $(this).find('input')[2].value;
-        output_tsc.push({
+        output_tsv.push({
             Prompt:pw ,
             Name:de ,
             UC:uc
         })
     });
-    // console.log(output_tsc)
-    localStorage.setItem('prompts', JSON.stringify(output_tsc)); // JSONに変換して取り込み
+    // console.log(output_tsv)
+    localStorage.setItem('prompts', JSON.stringify(output_tsv)); // JSONに変換して取り込み
     //prompts
-    toastr["info"]("呪文集をローカルに保存しました", "お知らせ");
+    toastr["info"]("呪文集をキャッシュに保存しました", "お知らせ");
 }
 
 
@@ -297,13 +301,15 @@ $(window).on('load',function(){
 //loadingデータ
 tags_file ='./tags.tsv'
 prompts_file = ''
-    if(tags_file!=''){
-        $.get(tags_file, function(loaddata) {
+    if(localStorage.getItem('tag') == null){
+    // if(1>0){ //test用
+      $.get(tags_file, function(loaddata) {
             console.log('tags読み込みが正常に行われました');
             jsondatas = csv2json(loaddata)
+            localStorage.setItem('tag', JSON.stringify(jsondatas)); // 初回処理JSONに変換して取り込み
             jsondatas.forEach(function(jsondata){
             // console.log(tag)
-                // console.log(jsondata)
+                console.log('jsondata'+jsondata)
                 if(jsondata['group']!=''){
                     tgroup = '#'+jsondata['group']+' ul'
                 }else{
@@ -313,6 +319,19 @@ prompts_file = ''
                 $(tgroup).append('<li><a name="'+jsondata['tag']+'" class="link-dark d-inline-flex text-decoration-none rounded">'+jsondata['Des']+'</a></li>');
             })        
         })
+    }else{
+      jsondatas = JSON.parse(localStorage.getItem('tag'))//動作OK
+      jsondatas.forEach(function(jsondata){
+            // console.log(tag)
+                // console.log('jsondata'+jsondata)
+                if(jsondata['group']!=''){
+                    tgroup = '#'+jsondata['group']+' ul'
+                }else{
+                    tgroup = '#userset ul'
+                }
+                
+                $(tgroup).append('<li><a name="'+jsondata['tag']+'" class="link-dark d-inline-flex text-decoration-none rounded">'+jsondata['Des']+'</a></li>');
+      }) 
     }
 
     // if(prompts_file !=''){
@@ -322,9 +341,9 @@ prompts_file = ''
     //         // console.log(jsondatas)
     //         jsondatas.forEach(function(jsondata){
             // addprompts_html = `          <tr>
-            //         <td><input type="text" value="`+jsondata['Prompts']+`" class="prompt"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">↑</button></td>
+            //         <td><input type="text" value="`+jsondata['Prompts']+`" class="prompt"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">タグ編集</button></td>
             //         <td><input type="text" value="`+jsondata['Name']+`" class="dec"></td>
-            //         <td><input type="text" value="`+jsondata['UC']+`" class="UC"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">↑</button></td>
+            //         <td><input type="text" value="`+jsondata['UC']+`" class="UC"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">タグ編集</button></td>
             //         <td><button class="btn .btn-info" id="x_button">x</button></td>
             //     </tr>`
             // $('#promptsbody').append(addprompts_html)
@@ -334,9 +353,9 @@ prompts_file = ''
     if(localStorage.getItem('prompts') == null){
       values = [
                 {
-                    Prompt:'呪文をここに入れる',
-                    Name:'呪文名称',
-                    UC:'除外をここに入れる'
+                    Prompt:'呪文をここに入れる ex.1girl,red hair',
+                    Name:'呪文名称 ex.赤髪の女の子',
+                    UC:'除外をここに入れる ex.NSFW'
                 }
       ];
     }else{
@@ -344,9 +363,9 @@ prompts_file = ''
     }
     values.forEach(function(jsondata){
       addprompts_html = `          <tr>
-              <td><input type="text" value="`+jsondata['Prompt']+`" class="prompt"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">↑</button></td>
+              <td><input type="text" value="`+jsondata['Prompt']+`" class="prompt"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">タグ編集</button></td>
               <td><input type="text" value="`+jsondata['Name']+`" class="dec"></td>
-              <td><input type="text" value="`+jsondata['UC']+`" class="UC"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">↑</button></td>
+              <td><input type="text" value="`+jsondata['UC']+`" class="UC"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">タグ編集</button></td>
               <td><button class="btn .btn-info" id="x_button">x</button></td></tr>`
       $('#promptsbody').append(addprompts_html)
 
