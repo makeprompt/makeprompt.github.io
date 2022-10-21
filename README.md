@@ -1,0 +1,2 @@
+# makeprompt.github.io
+prompt作成用 外部で使いたいからデータはすべてlocalstorageに保存し、同じ端末、同じブラウザからしか読み出し不能です
