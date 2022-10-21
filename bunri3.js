@@ -34,7 +34,16 @@ function tagadds(prompts){
     
     jumontukuru()
 }
-
+// Sortableの実装>
+$(function() {
+    // リストを並べ替え可能に
+    $('#sortable').sortable({
+      // updateで並べ替えるたびに更新
+      update: function(){
+       jumontukuru()
+      }
+    });
+  });
 
 function jumontukuru (){
     var itemIDs ='';
