@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- CSSの設定ファイル -->
+    <link rel="stylesheet" href="headers.css">
+    <link rel="stylesheet" href="sidebars.css">
+
+    <!-- jQuery、jQuery UIの読み込み -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.13.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"></script>
+    <!-- 通知用トースター用(Jquery必須) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>    
+  <title>Prompts</title>
+  </head>
+  <body>
+
+
+  <!-- ダークモードのログイン前のヘッダ -->
+  <header class="p-3 text-bg-dark sticky-top">
+    <div class="container"  style="background-color: #FFFFFF;">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <!-- <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"> -->
+            <!-- <li>呪文からタグリスト変換</li> -->
+
+              <!-- ここから呪文→tagリスト -->    
+
+              <!-- 参考：http://theologia.blog21.fc2.com/blog-entry-59.html -->
+              <input id="addtag" placeholder="{hoge},[hoge],hoge" >
+              <button id="addtag_b" class="btn btn-primary me-2">呪文からtagに追加</button>
+              <!-- <button id="addtag_bb">追加dd</button> -->
+              <!-- <button id="clear_b" class="btn btn-warning">入力欄クリア</button> -->
+              <!-- テストコード用ボタン -->
+              <!-- <button id="testcode">test</button> -->
+
+              <!-- ここまで呪文→tagリスト -->
+
+          </ul>
+  
+
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+          <input type="text" class="form-control form-control-dark text-bg-dark" id="log" value="" placeholder="生成呪文はここに">
+        </form>
+
+        <div class="text-end">
+          <select id="selbox" onchange="jumontukuru();">
+            <option value="novelai">強調は{}(NovelAI記法)</option>
+            <option value="sdwu">強調は()(SDWU記法)</option>
+          </select>
+          <button type="button" class="btn btn-primary me-2" id="copy">Copy</button>
+          <button type="button" class="btn btn-primary me-2" id="copytopro">Promptsに追加</button>
+          <button type="button" class="btn btn-warning" id="alldel">tag全削除</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- /ダークモードのログイン前のヘッダ -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2 border border-warning"><!-- 枠線 -->
+        <div class="row">
+          <div class="col border border-warning">
+
+            <!-- 折り畳み可能リストのサイドバー -->
+            <div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
+              <!-- /折り畳み可能リストのサイドバー -->
+
+              <h5>taglist</h5>
+              <!-- side -->
+              <ul class="list-unstyled ps-0" id="taglist">
+                <li class="mb-1" id="composition"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#composition-collapse" aria-expanded="false">構図</button><div class="collapse" id="composition-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="face"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#face-collapse" aria-expanded="false">表情系</button><div class="collapse" id="face-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="style"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#style-collapse" aria-expanded="false">スタイル</button><div class="collapse" id="style-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="emotion"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#emotion-collapse" aria-expanded="false">感情</button><div class="collapse" id="emotion-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="hairstyle"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#hairstyle-collapse" aria-expanded="false">髪型</button><div class="collapse" id="hairstyle-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="haircolor"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#haircolor-collapse" aria-expanded="false">髪色</button><div class="collapse" id="haircolor-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="eyecolor"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#eyecolor-collapse" aria-expanded="false">目の色</button><div class="collapse" id="eyecolor-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="attire"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#attire-collapse" aria-expanded="false">服装</button><div class="collapse" id="attire-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="attire_option"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#attire_option-collapse" aria-expanded="false">服装（オプション）</button><div class="collapse" id="attire_option-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="bustsize"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#bustsize-collapse" aria-expanded="false">胸囲</button><div class="collapse" id="bustsize-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="body"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#body-collapse" aria-expanded="false">身体的特徴</button><div class="collapse" id="body-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="pose_option"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#pose_option-collapse" aria-expanded="false">ポーズ</button><div class="collapse" id="pose_option-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="sight"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#sight-collapse" aria-expanded="false">画角</button><div class="collapse" id="sight-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="sex"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#sex-collapse" aria-expanded="false">性行為</button><div class="collapse" id="sex-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="cum"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#cum-collapse" aria-expanded="false">射精</button><div class="collapse" id="cum-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+                <li class="mb-1" id="userset"><button class="btn btn-toggle d-inline-flex align-items-center rounded border-0" data-bs-toggle="collapse" data-bs-target="#userset-collapse" aria-expanded="false">ユーザー定義</button><div class="collapse" id="userset-collapse"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"></ul></div></li>
+              </ul>
+              <!-- side -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-10 border border-warning">
+        <!-- main -->
+        <table class="table table-striped" id="sortable">
+          <thead>
+            <th>tag(編集可能)</th>
+            <th>説明</th>
+            <th>重みづけ</th>
+            <th>削除</th>
+          </thead>
+          <tbody id="addtagbody">
+            <!-- <tr>
+              <td><input type="text" value="1girl" class="prompt_item"></td>
+              <td>1女</td>
+              <td><input type="number" value="0" class="counter1" data-max="500" data-min="0"></td>
+              <td><button class="btn .btn-info" id="x_button">x</button></td>
+            </tr> -->
+          </tbody>
+        </table>
+        <!-- main end -->
+      <hr>
+      <h5>作成済みPrompts編集</h5>
+      <button id="downloadTSV" class="btn btn-primary me-2">PromptsをJSONで保存</button>
+      <button id="saveLocalstorage" class="btn btn-primary me-2">Promptsをローカルストレージに保存</button>
+      <div id="prompts_ex"></div>
+      <table class="table table-striped" id="prompts_ex">
+        <thead>
+          <th>Prompts</th>
+          <th>Name</th>
+          <th>Undesired Content</th>
+          <th>削除</th>
+        </thead>
+        <tbody id="promptsbody">
+
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+
+<!-- test -->
+<!-- <button id="testcode">test</button> -->
+<!-- test -->
+
+<!-- Script記載 後で分離 -->
+<script src="bunri3.js"></script>
+
+
+<script>
+//テスト中コード
+$('#testcode').click(function () {
+
+})
+$('#copytopro').click(function () {
+    pr = document.getElementById('log').value
+    addprompts_html = `          <tr>
+            <td><input type="text" value="`+pr+`" class="prompt"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">↑</button></td>
+            <td><input type="text" value="`+''+`" class="dec"></td>
+            <td><input type="text" value="`+''+`" class="UC"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">↑</button></td>
+            <td><button class="btn .btn-info" id="x_button">x</button></td>
+          </tr>`
+      $('#promptsbody').append(addprompts_html)
+    
+})
+$('#downloadTSV').click(function () {
+    makejson()
+})
+function maketsv(){
+    output_tsc ='Prompts\tName\tUC\n'
+    $('#promptsbody tr').map(function() {
+        // console.log($(this))
+        // ij = $(this).find('.counter1').val();
+
+        // tag_text = $(this).children('.prompt_item').val()
+        pw = $(this).find('input')[0].value;
+        de = $(this).find('input')[1].value;
+        uc = $(this).find('input')[2].value;
+        output_tsc += pw+'\t'+de+'\t'+uc+'\n'
+    });
+    // console.log(output_tsc)
+    //ダウンロードするCSVファイル名を指定する
+    const filename = "prompts.tsv";
+    //BOMを付与する（Excelでの文字化け対策）
+    const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
+    //Blobでデータを作成する
+    const blob = new Blob([bom, output_tsc], { type: "text/csv" });
+
+    //IE10/11用(download属性が機能しないためmsSaveBlobを使用）
+    if (window.navigator.msSaveBlob) {
+        window.navigator.msSaveBlob(blob, filename);
+    //その他ブラウザ
+    } else {
+        //BlobからオブジェクトURLを作成する
+        const url = (window.URL || window.webkitURL).createObjectURL(blob);
+        //ダウンロード用にリンクを作成する
+        const download = document.createElement("a");
+        //リンク先に上記で生成したURLを指定する
+        download.href = url;
+        //download属性にファイル名を指定する
+        download.download = filename;
+        //作成したリンクをクリックしてダウンロードを実行する
+        download.click();
+        //createObjectURLで作成したオブジェクトURLを開放する
+        (window.URL || window.webkitURL).revokeObjectURL(url);
+    }
+}
+function makejson(){
+    output_tsc =[]
+    $('#promptsbody tr').map(function() {
+        // console.log($(this))
+        // ij = $(this).find('.counter1').val();
+
+        // tag_text = $(this).children('.prompt_item').val()
+        pw = $(this).find('input')[0].value;
+        de = $(this).find('input')[1].value;
+        uc = $(this).find('input')[2].value;
+        output_tsc.push({
+            Prompt:pw,
+            Name:de,
+            UC:uc
+        })
+    });
+    // console.log(output_tsc)
+    //ダウンロードするCSVファイル名を指定する
+    const filename = "prompts.json";
+    //BOMを付与する（Excelでの文字化け対策）
+    // const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
+    //Blobでデータを作成する
+    const blob = new Blob([JSON.stringify(output_tsc)], { type: "text/csv" });
+
+    //IE10/11用(download属性が機能しないためmsSaveBlobを使用）
+    if (window.navigator.msSaveBlob) {
+        window.navigator.msSaveBlob(blob, filename);
+    //その他ブラウザ
+    } else {
+        //BlobからオブジェクトURLを作成する
+        const url = (window.URL || window.webkitURL).createObjectURL(blob);
+        //ダウンロード用にリンクを作成する
+        const download = document.createElement("a");
+        //リンク先に上記で生成したURLを指定する
+        download.href = url;
+        //download属性にファイル名を指定する
+        download.download = filename;
+        //作成したリンクをクリックしてダウンロードを実行する
+        download.click();
+        //createObjectURLで作成したオブジェクトURLを開放する
+        (window.URL || window.webkitURL).revokeObjectURL(url);
+    }
+}
+$('#saveLocalstorage').click(function () {
+    savelocalstorage()
+})
+function savelocalstorage(){
+    output_tsc = []
+    $('#promptsbody tr').map(function() {
+        // console.log($(this))
+        // ij = $(this).find('.counter1').val();
+
+        // tag_text = $(this).children('.prompt_item').val()
+        pw = $(this).find('input')[0].value;
+        de = $(this).find('input')[1].value;
+        uc = $(this).find('input')[2].value;
+        output_tsc.push({
+            Prompt:pw ,
+            Name:de ,
+            UC:uc
+        })
+    });
+    // console.log(output_tsc)
+    localStorage.setItem('prompts', JSON.stringify(output_tsc)); // JSONに変換して取り込み
+    //prompts
+    toastr["info"]("呪文集をローカルに保存しました", "お知らせ");
+}
+
+
+// Copyボタン制御
+$(document).on('click','#ucc_button',function() {
+//   console.log($(this).prevAll('input').val())
+    navigator.clipboard.writeText($(this).prevAll('input').val());//https以外で動作しない注意
+    // console.log(document.getElementById('log').innerHTML)
+    // $('#info').text('クリップボードにコピーしました')
+    toastr["info"]("クリップボードにコピーしました", "お知らせ");
+    // console.log("ucコピー動作発火")
+})
+// 作成済みpromptを使用
+$(document).on('click','#pc_button',function() {
+  console.log($(this).prevAll('input').val())
+  tagadds($(this).prevAll('input').val())
+    // navigator.clipboard.writeText(document.getElementById('log').value);//https以外で動作しない注意
+    // console.log(document.getElementById('log').innerHTML)
+    // $('#info').text('クリップボードにコピーしました')
+    // toastr["info"]("クリップボードにコピーしましたく", "お知らせ");
+    // console.log("pコピー動作発火")
+})
+$(window).on('load',function(){
+//loadingデータ
+tags_file ='./tags.tsv'
+prompts_file = ''
+    if(tags_file!=''){
+        $.get(tags_file, function(loaddata) {
+            console.log('tags読み込みが正常に行われました');
+            jsondatas = csv2json(loaddata)
+            jsondatas.forEach(function(jsondata){
+            // console.log(tag)
+                // console.log(jsondata)
+                if(jsondata['group']!=''){
+                    tgroup = '#'+jsondata['group']+' ul'
+                }else{
+                    tgroup = '#userset ul'
+                }
+                
+                $(tgroup).append('<li><a name="'+jsondata['tag']+'" class="link-dark d-inline-flex text-decoration-none rounded">'+jsondata['Des']+'</a></li>');
+            })        
+        })
+    }
+
+    // if(prompts_file !=''){
+    //     $.get(prompts_file, function(loaddata) {
+    //         console.log('load読み込みが正常に行われました');
+    //         jsondatas = csv2json(loaddata)
+    //         // console.log(jsondatas)
+    //         jsondatas.forEach(function(jsondata){
+            // addprompts_html = `          <tr>
+            //         <td><input type="text" value="`+jsondata['Prompts']+`" class="prompt"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">↑</button></td>
+            //         <td><input type="text" value="`+jsondata['Name']+`" class="dec"></td>
+            //         <td><input type="text" value="`+jsondata['UC']+`" class="UC"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">↑</button></td>
+            //         <td><button class="btn .btn-info" id="x_button">x</button></td>
+            //     </tr>`
+            // $('#promptsbody').append(addprompts_html)
+            // })
+    //     })
+    // }
+    if(localStorage.getItem('prompts') == null){
+      values = [
+                {
+                    Prompt:'呪文をここに入れる',
+                    Name:'呪文名称',
+                    UC:'除外をここに入れる'
+                }
+      ];
+    }else{
+        values = JSON.parse(localStorage.getItem('prompts'))//動作OK
+    }
+    values.forEach(function(jsondata){
+      addprompts_html = `          <tr>
+              <td><input type="text" value="`+jsondata['Prompt']+`" class="prompt"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">↑</button></td>
+              <td><input type="text" value="`+jsondata['Name']+`" class="dec"></td>
+              <td><input type="text" value="`+jsondata['UC']+`" class="UC"><button class="btn .btn-info" id="ucc_button">Copy</button><button class="btn .btn-info" id="pc_button">↑</button></td>
+              <td><button class="btn .btn-info" id="x_button">x</button></td></tr>`
+      $('#promptsbody').append(addprompts_html)
+
+    })
+})
+</script>
+
+</body>
+</html>

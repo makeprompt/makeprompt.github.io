@@ -1,0 +1,25 @@
+/* ダークモードのログイン前のヘッダ用 */
+.form-control-dark {
+    color: #fff;
+    background-color: var(--bs-dark);
+    border-color: var(--bs-gray);
+  }
+  .form-control-dark:focus {
+    color: #fff;
+    background-color: var(--bs-dark);
+    border-color: #fff;
+    box-shadow: 0 0 0 .25rem rgba(255, 255, 255, .25);
+  }
+  
+  /* ログイン済のヘッダ用 */
+  .text-small {
+    font-size: 85%;
+  }
+  
+  /* ログイン済のヘッダ、グリッド付きのヘッダ用 */
+  .dropdown-toggle {
+    outline: 0;
+  }
+  section {
+    overflow: scroll;
+  }

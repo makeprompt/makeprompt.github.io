@@ -1,0 +1,301 @@
+タイムスタンプ	ジャンル	group	tag	Des	備考
+2022/10/19 19:41:20	表情系		glowing eyes	発光目	
+2022/10/19 20:21:37	表情系		heterochromia	オッドアイ	オッドアイになる。 ただし、瞳孔の形が左右で変わったりと安定しない為、 何回か生成を繰り返す必要がある。
+		composition	full_body	全身	
+		composition	breasts	胸頭	
+		composition	upper_body	上半身	
+		composition	dutch_angle	上から全体	
+		composition	head_out_of_frame	頭部を枠外に出し	
+		composition	feet_out_of_frame	腰から頭	
+		composition	game_cg	画面全体	
+		composition	multiple_views	複数表示	
+		composition	contrapposto	彫刻たち	
+		composition	head out of frame	頭をフレーム外へ	
+		composition	feet out of frame	足をフレーム外へ	
+		composition	upper body	【絵の中心部分】顔中心	
+		composition	bangs	【絵の中心部分】顔中心	
+		composition	portrait	【絵の中心部分】顔中心	
+		composition	feet	【絵の中心部分】足	
+		composition	lips	【絵の中心部分】口	
+		composition	legs	【絵の中心部分】足	
+		composition	eyelashes	【絵の中心部分】まつ毛	
+		composition	ass	【絵の中心部分】尻	
+		composition	toes	【絵の中心部分】足	
+		composition	thick_thighs	【絵の中心部分】太もも	
+		composition	soles	【絵の中心部分】足裏	
+		composition	pov	【絵の中心部分】主観	
+		composition	selfie	【絵の中心部分】自撮り	
+		composition	Panty shot	【絵の中心部分】パンツ中心	
+		composition	cowboy shot	【絵の中心部分】腰中心？	
+		composition	pov hands	【絵の中心部分】一人称視点、手あり（povだけでは✕、legsも✕）	
+		composition	ass visible through thighs 	【絵の中心部分】太ももから見えるお尻	
+		composition	from_side	【キャラの向き】横	
+		composition	sideboob	【キャラの向き】横から胸肩	
+		composition	from_behind	【キャラの向き】後ろ	
+		composition	looking_back	【キャラの向き】後ろ	
+		composition	back	【キャラの向き】お尻から肩	
+		composition	profile	【キャラの向き】顔半分	
+		composition	from_above	【キャラの向き】上から見る	
+		composition	looking up	【キャラの向き】見上げる	
+		composition	from_below	【キャラの向き】下から	
+		composition	looking_down	【キャラの向き】下から	
+		composition	foreshortening	【キャラの向き】小人視点	
+		composition	aiming at viewer	【キャラの向き】見てる人を狙う（カメラ目線で銃を向ける）	
+		composition	selfie	【キャラの向き】自撮り	
+		composition	through glass	【キャラの向き】ガラス越し	
+		composition	against glass	【キャラの向き】ガラス越し	
+		composition	three views from front	【キャラの向き】第三者視点	
+		composition	looking_at_viewe	【キャラの向き】下から見上げる感じの出力	
+		pose_option	head_tilt	【キャラのポーズ】首を傾ける	
+		pose_option	standing	【キャラのポーズ】立っている	
+		pose_option	leaning_forward	【キャラのポーズ】体をちょっと前かがみにしたようなポーズ。お辞儀ぐらいの角度が多い。	
+		pose_option	flying_sweatdrops	【キャラのポーズ】汗が人体から飛び散っているが本来の意味だが、Waifu Diffusionでは汗が出力されないので、スポーツ的、活発的な恰好になる意味で使うとよい。	
+		pose_option	sitting	【キャラのポーズ】座っている	
+		pose_option	holding	【キャラのポーズ】何かを持つ	
+		pose_option	holding_weapon	【キャラのポーズ】武器を持つ	
+		pose_option	holding_sword	【キャラのポーズ】剣を持つ	
+		pose_option	armpits	【キャラのポーズ】わきの下が見えやすい構図、ポーズになる(手を上げるなど)	
+		pose_option	hand_up	【キャラのポーズ】手を上げる手が目より下の場合。	
+		pose_option	hands_up	【キャラのポーズ】両手を上げる	
+		pose_option	arm_up	【キャラのポーズ】手を上げる。手が目を超える場合。	
+		pose_option	arms_up	【キャラのポーズ】両手を上げる。	
+		pose_option	outstretched_arms	【キャラのポーズ】腕を伸ばしている	
+		pose_option	crossed_arms	【キャラのポーズ】手を体の前で交差させている。腕組み。	
+		pose_option	arm_support	【キャラのポーズ】腕を使って自分の体重を支えるポーズ。	
+		pose_option	arms_behind_back	【キャラのポーズ】腕を後ろに組む。	
+		pose_option	grabbing	【キャラのポーズ】何かを掴もうとする。実際に掴むというよりは掴もうとする画像が出力されやすい。	
+		pose_option	eating	【キャラのポーズ】：食べている。実際に食べ物と一緒に出力され、口に何か含んでいる確率が高い。	
+		pose_option	hand_on_hip	【キャラのポーズ】手を腰に当てている	
+		pose_option	;D	【キャラのポーズ】大きく口を開けた笑顔 + ウインク ただ、ウインクの的中率が少々低い気がする	
+		pose_option	spread_legs	【キャラのポーズ】足を広げる	
+		pose_option	standing_on_one_leg	【キャラのポーズ】片足立ち	
+		pose_option	leg_up	【キャラのポーズ】片足を空中に上げる。	
+		pose_option	crossed_legs	【キャラのポーズ】足を交差させる	
+		pose_option	kneeling	【キャラのポーズ】膝まづく	
+		pose_option	squatting	【キャラのポーズ】しゃがむ	
+		pose_option	lying	【キャラのポーズ】横たわっている	
+		pose_option	on_side	【キャラのポーズ】横向きに横たわっている。	
+		pose_option	on_back	【キャラのポーズ】仰向けに横たわっている　的中率低め	
+		pose_option	sleeping	【キャラのポーズ】寝ている（完全に熟睡で目をつむっている）	
+		pose_option	on_bed	【キャラのポーズ】：ベッドの上に座って、および寝ているポーズ、および背景もベッドになる	
+		pose_option	bound	【キャラのポーズ】縛られる、拘束される　シチュ、及び単純に縄などの装飾具追加 + 恰好	
+		pose	hyper extreme detailed	【絵の精度】上がる	
+		face	badmood	不機嫌	
+		face	kind smile	優しい笑顔	
+		face	staring	見つめる	
+		face	fang	八重歯	
+		face	anguish, trouble	苦悶、困り顔	
+		face	gasping	控えめのアヘ顔	
+		face	tongue out, smirk	舌なめずり	
+		face	smirk	不敵な笑み	
+		face	pupils sparkling	目がキラーン	
+		face	unamused	むっとする	
+		face	glaring	睨む	
+		face	ahegao	アへ顔	
+		face	smile	笑顔	
+		face	happy	幸せ	
+		face	embarrassed	はずかしい	
+		face	female_orgasm	絶頂感	
+		face	expressionless	無表情	
+		face	teasing smile	小馬鹿にした笑顔	
+		face	evil smile	いたずら顔	
+		face	naughty smile	いたずら顔	
+		face	seductive smile	魅惑的な笑み	
+		face	grin	歯を見せてニカっと笑う	
+		face	:o	キョトン，意味を理解していない感じ	
+		face	clear face expressionless	すまし顔	
+		face	smug face	ドヤ顔	
+		face	glowing eyes	発光目	
+		face	snake pupils	ヘビの目	
+		face	wavy mouth	もごもごした口	
+		face	upturned_eyes	上目遣い	
+		face	troubled eyebrows	ハの字の眉	
+		face	heterochromia	オッドアイ	
+		face	clenched_teeth	歯を食いしばる	
+		face	closed eyes	閉じ目	
+		face	hair over one eyes	目隠れ	
+		face	emptyeyes	レイプ目	
+		face	jitome	ジト目	
+		face	tsurime	ツリ目	
+		face	tareme	垂れ目	
+		face	ringedeyes	瞳孔と黒目がはっきり区別される	
+		face	diamond-shaped pupils	ひし形の瞳孔	
+		face	star-shaped pupils	星形の瞳孔	
+		face	heart-shaped pupils	ハート形の瞳孔	
+		face	open mouth	口を開ける	
+		face	close_mouth	口を閉じる	
+		face	blush	頬赤染め	
+		face	V-shaped eyebrows	逆八の字の眉	
+		style	sketch	スケッチ	
+		style	watercolor	水彩	
+		style	oil painting	油彩	
+		style	thick outline	厚い輪郭	
+		style	black outline	黒い輪郭	
+		emotion	crying with eyes open	泣く（目を開いて）	
+		emotion	smile	笑顔	
+		emotion	blush	頬染め	
+		emotion	crying	泣く	
+		emotion	sad	悲しみ	
+		emotion	shy	羞恥A	
+		emotion	embarrassed	羞恥B	
+		emotion	expressionless	ジト目A	
+		emotion	empty eyes	ジト目B	
+		emotion	angry	怒り	
+		emotion	scared	怯え	
+		emotion	seductive smile	誘惑（蠱惑）	
+		emotion	ahegao	アヘ顔	
+		emotion	orgasm	絶頂	
+		hairstyle	long hair	ロングヘア	
+		hairstyle	short hair	ショートヘア	
+		hairstyle	medium hair	セミロング	
+		hairstyle	twintails	ツインテール	
+		hairstyle	ponytail	ポニーテール	
+		hairstyle	side ponytail	サイドテール	
+		hairstyle	two side up	ツーサイドアップ	
+		hairstyle	bob cut	ボブ	
+		hairstyle	ahoge	アホ毛	
+		hairstyle	messy hair	くせっ毛（モジャ）	
+		hairstyle	hair over one eye	片目隠れ	
+		hairstyle	hair over eyes	メカクレ	
+		hairstyle	braid	三つ編み	
+		hairstyle	hair between eyes	目の間の髪	
+		hairstyle	french braid	フランスの三つ編み	
+		hairstyle	hair bun	おだんごヘア	
+		hairstyle	wavy hair	ウェーブヘア	
+		hairstyle	low-tied long hair	後ろで縛っている長髪	
+		hairstyle	blunt bangs	ぱっつん	
+		hairstyle	parted bangs	センター分け	
+		hairstyle	swept bangs	片方分け	
+		hairstyle	crossed bangs	目のところでばってんの毛	
+		haircolor	black hair	黒髪	
+		haircolor	brown hair	茶髪	
+		haircolor	blonde hair	金髪	
+		haircolor	pink hair	ピンク髪	
+		haircolor	red hair	赤髪	
+		haircolor	green hair	緑髪	
+		haircolor	blue hair	青髪	
+		haircolor	aqua hair	青緑髪（アクア）	
+		haircolor	grey hair	銀髪	
+		haircolor	purple hair	紫髪	
+		haircolor	white hair	白髮	
+		haircolor	two-tone hair	ツートン	
+		haircolor	multicolored hair	複数色髪	
+		haircolor	gradient hair	グラデーション	
+		eyecolor	black eyes	黒目	
+		eyecolor	brown eyes	茶目	
+		eyecolor	yellow eyes	金眼	
+		eyecolor	pink eyes	ピンク目	
+		eyecolor	red eyes	アカメ	
+		eyecolor	green eyes	翠眼（緑）	
+		eyecolor	blue eyes	碧眼（青）	
+		eyecolor	aqua eyes	青緑眼	
+		eyecolor	grey eyes	銀目	
+		eyecolor	purple eyes	紫目	
+		eyecolor	white eyes	白眼	
+		eyecolor	heterochromia	オッドアイ	
+		eyecolor	gradient eyes	グラデーションアイ	
+		attire	nude	裸	
+		attire	completely nude	全裸	
+		attire	underwear	下着	
+		attire	t-shirt	Tシャツ	
+		attire	dress	ドレス・ワンピース	
+		attire	frilled shirt	フリル付きの服	
+		attire	long sleeves	長袖	
+		attire	coat	コート	
+		attire	leotard	レオタード	
+		attire	kimono	着物	
+		attire	swimsuit	水着	
+		attire	bikini	ビキニ	
+		attire	school uniform	制服	
+		attire	micro bikini	マイクロビキニ	
+		attire	thighhighs	ニーソ	
+		attire	boots	ブーツ	
+		attire	knee boots	ロングブーツ	
+		attire	skirt	スカート	
+		attire	miniskirt	ミニスカート	
+		attire	bike shorts	スパッツ	
+		attire	bare shoulders	肩出し	
+		attire	open clothes	はだけている状態	
+		attire_option	hat	帽子	
+		attire_option	mask	マスク	
+		attire_option	gloves	手袋	
+		attire_option	choker	チョーカー	
+		attire_option	ribbon	リボン	
+		attire_option	covering eyes	目隠し	
+		attire_option	hair bow	ヘアリボン	
+		attire_option	collar	首輪	
+		bustsize	flat chest	無乳	
+		bustsize	small breasts	貧乳	
+		bustsize	large breasts	巨乳	
+		bustsize	huge breasts	爆乳	
+		bustsize	hanging breasts	垂れ乳	
+		body	mole	ほくろ	
+		body	mole under eye	泣きぼくろ	
+		body	dark skin	褐色	
+		body	cat ears	猫耳	
+		body	cat tail	猫しっぽ	
+		body	fake animal ears	つけ耳（ウサギ耳等）	
+		body	cameltoe	すじ	
+		body	tomboy	ボーイッシュ	
+		body	nail polish	マニキュア	
+		body	puffy nipples	パフィーニップル	
+		body	empty eyes	レイプ目	
+		body	abs	腹筋	
+		body	futanari	フタナリ	
+		body	pubic hair	陰毛	
+		pose	lying	寝そべり	
+		pose	on back	仰向け	
+		pose	on stomach	うつ伏せ	
+		pose	all fours	四つん這い	
+		pose	standing	立ち姿	
+		pose	running	走っている姿	
+		pose	sitting	座っている	
+		pose	spread legs	開脚	
+		pose	kneeling	膝立ち	
+		pose	crossed legs	足組み	
+		pose	hugging own legs	体育座り	
+		pose	seiza	正座	
+		pose	knees together feet apart	足を閉じる	
+		pose	wariza	女の子座り	
+		pose_option	closed mouth	閉口	
+		pose_option	open mouse	開口	
+		pose_option	tongue out	舌出し	
+		pose_option	double v	ダブルピース	
+		pose_option	breast press	あててんのよ	
+		pose_option	areola slip	乳輪チラリ	
+		pose_option	lifted by self	たくし上げ	
+		pose_option	hand between legs	手を足にかける	
+		pose_option	tachi-e	立ち絵	
+		pose_option	pussy juice	愛液	
+		pose_option	sleeping	睡眠	
+		pose_option	peeing	おしっこ	
+		pose_option	have to pee	おしっこ	
+		sight	looking at viewer	カメラ目線	
+		sight	from side	横から	
+		sight	from above	上から	
+		sight	from behind	後ろから	
+		sight	from below	下から	
+		sight	fisheye	魚眼	
+		sight	panorama	パノラマ	
+		sex	sex	セックス	
+		sex	fellatio	フェラチオ	
+		sex	testicle_sucking	タマ舐め	
+		sex	handjob	手コキ	
+		sex	breast grab	乳揉み	
+		sex	straddling	馬乗り、騎乗位	
+		sex	sex from behind	バック	
+		sex	suspended congress	駅弁	
+		sex	paizuri	パイズリ	
+		sex	cowgirl position	騎乗位	
+		sex	reverse cowgirl position	背面騎乗位	
+		sex	missionary	正常位	
+		sex	clothing aside	ずらし挿入	
+		sex	after sex	事後、射精直後	
+		cum	ejaculation	射精	
+		cum	facial	顔射	
+		cum	cum in mouth	口内射精（ごっくん）	
+		cum	cum in pussy	腟内射精（中出し）	
+		cum	creampie	腟内射精（中出し）	
+		cum	cumdrip	溢れ精液	
+		cum	precum	ガマン汁	
+		sex	nsfw	NSFW	
