@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- CSSの設定ファイル -->
+    <link rel="stylesheet" href="headers.css">
+    <link rel="stylesheet" href="sidebars.css">
+
+    <!-- jQuery、jQuery UIの読み込み -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.13.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/1.0.21/jquery.csv.min.js"></script>
+    <!-- 通知用トースター用(Jquery必須) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>    
+  <title>prompts編集</title>
+  </head>
+  <body>
+    <h1>prompts編集</h1>
+    <p>メイン画面に表示される保存済みpromptsを編集します。基本的には追加してキャッシュに保存を押すとメイン画面更新時に反映されます。</p>
+    <p>JSONで保存は他の端末との共有などで使用します。保存したJSONを移動先端末のこの画面でファイル選択から選択してください。</p>
+    <p><b>注意事項</b>ファイル読み込みはデータの内容をチェックしません。内部にJavascriptなどを書かれた場合は危険なスクリプトが動作する可能性があります。取り込みの際は信用できるファイルを使用してください。</p>
+  <!-- ダークモードのログイン前のヘッダ -->
+  <header class="p-3 text-bg-dark sticky-top">
+    <div class="container"  style="background-color: #FFFFFF;">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <!-- <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"> -->
+            <!-- <li>呪文からタグリスト変換</li> -->
+
+              <!-- ここから呪文→tagリスト -->    
+
+              <div id ='addtagdiv'>
+              <input id="tag" placeholder="prompt" >
+              <input id="Dec" placeholder="説明" >
+              <input id="Dec" placeholder="UC" >
+              </div>
+              <!-- <button id="addtag_bb">追加dd</button> -->
+              <!-- <button id="clear_b" class="btn btn-warning">入力欄クリア</button> -->
+              <!-- テストコード用ボタン -->
+              <!-- <button id="testcode">test</button> -->
+
+              <!-- ここまで呪文→tagリスト -->
+
+
+        <div class="text-end">
+        <button id="addtaglist" class="btn btn-primary me-2">promptに追加</button>
+          <button type="button" class="btn btn-primary me-2" id="savetagjson">JSONで保存</button>
+          <button type="button" class="btn btn-primary me-2" id="savetaglocal">キャッシュに保存</button>
+          <button type="button" class="btn btn-warning" id="tag_table_alldel">prompts全削除</button>
+          <button type="button" class="btn btn-warning" id="tag_cache_alldel">キャッシュデータ全削除</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- /ダークモードのログイン前のヘッダ -->  
+    <form name="myform">
+      <input name="myfile" type="file" />
+    </form>
+    
+<script>
+// jsonファイル読み込み処理    
+    //Form要素を取得する
+    var form = document.forms.myform;
+    
+    //ファイルが読み込まれた時の処理
+    form.myfile.addEventListener('change', function(e) {
+    
+
+        var result = e.target.files[0];
+
+        //FileReaderのインスタンスを作成する
+        var reader = new FileReader();
+
+        //読み込んだファイルの中身を取得する
+        reader.readAsText( result );
+
+        //ファイルの中身を取得後に処理を行う
+        reader.addEventListener( 'load', function() {
+        
+            //ファイルの中身をtextarea内に表示する
+            // form.output.textContent = reader.result;    
+            // console.log(reader.result)
+            // result = reader.result
+        // ここから個別の処理
+
+        target = '#sortable_table'//セレクターで指定
+        loadjson = JSON.parse(reader.result)
+        // console.log(loadjson)
+        loadjson.forEach(function(jsondata){
+
+            $(target).append(`<tr>
+          <td><input type="text" value="`+jsondata['Prompt']+`" class="prompt_item"><button class="btn .btn-info" id="ucc_button">Copy</button></td>
+          <td><input type="text" value="`+jsondata['Name']+`" class="tag_dec"></td><td><input type="text" value="`+jsondata['UC']+`" class="tag_dec"><button class="btn .btn-info" id="ucc_button">Copy</button></td><td><button class="btn .btn-info" id="x_button">x</button></td>
+        </tr>
+        `);
+        // 所定のgroupになっていないものは置換が行われないのでユーザー定義として一括処理
+        // console.log(jsondata['group'])
+        })  
+    })
+
+    })
+//ここまでjson読み込み
+//ボタン処理関係addtaglist
+$('#addtaglist').click(function(){
+    prompt = $('div#addtagdiv').children('input')[0].value
+    Name = $('div#addtagdiv').children('input')[1].value
+    UC = $('div#addtagdiv').children('input')[2].value
+
+        target = '#sortable_table'//セレクターで指定
+        $(target).append(`<tr>
+          <td><input type="text" value="`+prompt+`" class="prompt_item"><button class="btn .btn-info" id="ucc_button">Copy</button></td>
+          <td><input type="text" value="`+Name+`" class="tag_dec"></td><td><input type="text" value="`+UC+`" class="UC"><button class="btn .btn-info" id="ucc_button">Copy</button></td><td><button class="btn .btn-info" id="x_button">x</button></td>
+        </tr>
+        `);
+
+
+
+
+})
+$('#savetagjson').click(function(){
+    data = pre_allpromptsave()
+    const filename = "prompts.json";
+
+    //Blobでデータを作成する
+    const blob = new Blob([JSON.stringify(data)], { type: "text/csv" });
+
+    //IE10/11用(download属性が機能しないためmsSaveBlobを使用）
+    if (window.navigator.msSaveBlob) {
+        window.navigator.msSaveBlob(blob, filename);
+    //その他ブラウザ
+    } else {
+        //BlobからオブジェクトURLを作成する
+        const url = (window.URL || window.webkitURL).createObjectURL(blob);
+        //ダウンロード用にリンクを作成する
+        const download = document.createElement("a");
+        //リンク先に上記で生成したURLを指定する
+        download.href = url;
+        //download属性にファイル名を指定する
+        download.download = filename;
+        //作成したリンクをクリックしてダウンロードを実行する
+        download.click();
+        //createObjectURLで作成したオブジェクトURLを開放する
+        (window.URL || window.webkitURL).revokeObjectURL(url);
+    }
+    toastr["info"]("tagリストをJSONで保存しました", "お知らせ");
+})
+$('#savetaglocal').click(function(){
+    data = pre_allpromptsave()
+    localStorage.setItem('prompts', JSON.stringify(data)); // JSONに変換して取り込み
+    //prompts
+    toastr["info"]("promptsリストをキャッシュに保存しました", "お知らせ");
+})
+$('#tag_cache_alldel').click(function(){
+  var result = confirm('キャッシュデータを削除しますか？promptsを全削除する場合に使用してください');
+ 
+ if( result ) {
+  
+  localStorage.removeItem('prompts')
+  document.querySelector('#sortable_table').innerHTML ="";  
+ }
+
+})
+$('#tag_table_alldel').click(function(){
+    document.querySelector('#sortable_table').innerHTML ="";
+})
+function pre_allpromptsave(){
+    output_tsv = []
+    $('#sortable_table tr').map(function() {
+
+        newpro = $(this).find('input')[0].value;
+        newname = $(this).find('input')[1].value;
+        newuc = $(this).find('input')[2].value;
+
+        output_tsv.push({
+            Prompt:newpro ,
+            Name:newname ,
+            UC:newuc 
+        })
+    })
+    console.log(output_tsv)
+    return output_tsv
+
+}
+// Copyボタン制御
+$(document).on('click','#ucc_button',function() {
+//   console.log($(this).prevAll('input').val())
+    navigator.clipboard.writeText($(this).prevAll('input').val());//https以外で動作しない注意
+    // console.log(document.getElementById('log').innerHTML)
+    // $('#info').text('クリップボードにコピーしました')
+    toastr["info"]("クリップボードにコピーしました", "お知らせ");
+    // console.log("ucコピー動作発火")
+})
+//ここまでボタン処理関係
+
+//キャッシュのprompts読み込み
+$(window).on('load',function(){
+
+  if(localStorage.getItem('prompts') == null){
+  values = [
+      {
+          Prompt:'呪文をここに入れる ex.1girl,red hair',
+          Name:'呪文名称 ex.赤髪の女の子',
+          UC:'除外をここに入れる ex.NSFW'
+      }
+    ];
+  }else{
+    values = JSON.parse(localStorage.getItem('prompts'))//動作OK
+  }
+  values.forEach(function(jsondata){
+  addprompts_html = `          <tr>
+  <td><input type="text" value="`+jsondata['Prompt']+`" class="prompt"><button class="btn .btn-info" id="ucc_button">Copy</button></td>
+  <td><input type="text" value="`+jsondata['Name']+`" class="dec"></td>
+  <td><input type="text" value="`+jsondata['UC']+`" class="UC"><button class="btn .btn-info" id="ucc_button">Copy</button></td>
+  <td><button class="btn .btn-info" id="x_button">x</button></td></tr>`
+  $('#sortable_table').append(addprompts_html)
+
+  })
+})
+//ここまでキャッシュのtaglist読み込み
+
+</script>
+<script src="bunri3.js"></script>
+<div class="col-12">
+    <!-- main -->
+    <table class="table table-striped" id="sortable">
+      <thead>
+        <th>Prompt</th>
+        <th>説明文</th>
+        <th>UC</th>
+        <th>削除</th>
+      </thead>
+      <tbody id="sortable_table">
+
+      </tbody>
+    </table>
+  </body>

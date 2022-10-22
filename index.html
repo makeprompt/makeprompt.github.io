@@ -125,6 +125,7 @@
       <p></p>
       <button id="downloadTSV" class="btn btn-primary me-2">PromptsをJSONで保存</button>
       <button id="saveLocalstorage" class="btn btn-primary me-2">Promptsをキャッシュに保存</button>
+      <a href="./prompts.html" target="_blank"><button class="btn btn-primary me-2">Prompts編集</button></a>
       <div id="prompts_ex"></div>
         <table class="table table-striped" id="prompts_ex">
           <thead>
@@ -296,7 +297,7 @@ $(document).on('click','#ucc_button',function() {
 })
 // 作成済みpromptを使用
 $(document).on('click','#pc_button',function() {
-  console.log($(this).prevAll('input').val())
+  // console.log($(this).prevAll('input').val())
   tagadds($(this).prevAll('input').val())
     // navigator.clipboard.writeText(document.getElementById('log').value);//https以外で動作しない注意
     // console.log(document.getElementById('log').innerHTML)
