@@ -3,13 +3,17 @@ prompt作成用 データはすべてlocalstorageに保存しますので、入�
 # 謝辞
 このツールは<a href="https://twitter.com/gyakuse" target="_blank">逆瀬川(@gyakuse)様</a>の<a href="https://t.co/b5E6FGIFea" target="_blank">Magic Generator</a>を参考として、個人的に使用したい機能(すでに作成された呪文をいじる)をメインに無理やり実装しています。
 # 使用方法
+## 基本的な流れ
+
+
+
+https://user-images.githubusercontent.com/116355282/197325340-6e35d17f-61f0-4bc0-96c1-0b4d7d4a8180.mp4
+
+
 1. NovelAIから呪文をコピーしてきます
-<img width="523" alt="ss001" src="https://user-images.githubusercontent.com/116355282/197311138-759bbff8-7bc7-4bc2-bb6d-e2415340db8c.png">
-
-
 2. サイト左上のテキストボックスにペーストし「呪文からtagに追加」をクリック
+<img width="523" alt="ss001" src="https://user-images.githubusercontent.com/116355282/197311138-759bbff8-7bc7-4bc2-bb6d-e2415340db8c.png">
 <img width="856" alt="ss002" src="https://user-images.githubusercontent.com/116355282/197311522-4ba14528-4826-443b-9c54-048681260f2f.png">
-
 <img width="794" alt="ss003" src="https://user-images.githubusercontent.com/116355282/197311257-7aac8010-14cc-4215-b4bf-33ca1e103c00.png">
 NovelAIの重みづけまで反映して追加されます
 
