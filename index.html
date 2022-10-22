@@ -299,7 +299,7 @@ $(document).on('click','#pc_button',function() {
 })
 $(window).on('load',function(){
 //loadingデータ
-tags_file ='./tags.tsv'
+tags_file ='./tags.tsv' //初回ロード用タグリスト
 prompts_file = ''
     if(localStorage.getItem('tag') == null){
     // if(1>0){ //test用

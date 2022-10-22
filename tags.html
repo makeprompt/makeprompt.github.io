@@ -71,6 +71,7 @@
           <button type="button" class="btn btn-primary me-2" id="savetagjson">JSONで保存</button>
           <button type="button" class="btn btn-primary me-2" id="savetaglocal">キャッシュに保存</button>
           <button type="button" class="btn btn-warning" id="tag_table_alldel">tag全削除</button>
+          <button type="button" class="btn btn-warning" id="tag_cache_alldel">キャッシュデータ全削除</button>
         </div>
       </div>
     </div>
@@ -209,6 +210,16 @@ $('#savetaglocal').click(function(){
     localStorage.setItem('tag', JSON.stringify(data)); // JSONに変換して取り込み
     //prompts
     toastr["info"]("tagリストをキャッシュに保存しました", "お知らせ");
+})
+$('#tag_cache_alldel').click(function(){
+  var result = confirm('キャッシュデータを削除しますか？taglistを初期化する場合に使用してください');
+ 
+ if( result ) {
+  
+  localStorage.removeItem('tag')
+  document.querySelector('#sortable_table').innerHTML ="";  
+ }
+
 })
 $('#tag_table_alldel').click(function(){
     document.querySelector('#sortable_table').innerHTML ="";
