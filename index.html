@@ -308,8 +308,10 @@ prompts_file = ''
             jsondatas = csv2json(loaddata)
             localStorage.setItem('tag', JSON.stringify(jsondatas)); // 初回処理JSONに変換して取り込み
             jsondatas.forEach(function(jsondata){
+              console.log(jsondata['active'])
             // console.log(tag)
-                console.log('jsondata'+jsondata)
+            if(jsondata['active'] == 1){
+                // console.log('jsondata'+jsondata)
                 if(jsondata['group']!=''){
                     tgroup = '#'+jsondata['group']+' ul'
                 }else{
@@ -317,11 +319,13 @@ prompts_file = ''
                 }
                 
                 $(tgroup).append('<li><a name="'+jsondata['tag']+'" class="link-dark d-inline-flex text-decoration-none rounded">'+jsondata['Des']+'</a></li>');
-            })        
+              }
+          })        
         })
     }else{
       jsondatas = JSON.parse(localStorage.getItem('tag'))//動作OK
       jsondatas.forEach(function(jsondata){
+        if(jsondata['active'] == 1){
             // console.log(tag)
                 // console.log('jsondata'+jsondata)
                 if(jsondata['group']!=''){
@@ -331,6 +335,7 @@ prompts_file = ''
                 }
                 
                 $(tgroup).append('<li><a name="'+jsondata['tag']+'" class="link-dark d-inline-flex text-decoration-none rounded">'+jsondata['Des']+'</a></li>');
+              }
       }) 
     }
 

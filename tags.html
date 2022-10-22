@@ -167,10 +167,11 @@ $('#addtaglist').click(function(){
             <option value="sex">性行為</option>
             <option value="cum">射精</option>
             </select></td>`
+    chbox_word ='<td><input type="checkbox" id="chbox" checked></td>'
         target = '#sortable_table'//セレクターで指定
         $(target).append(`<tr>
           <td><input type="text" value="`+tag+`" class="prompt_item"></td>
-          <td><input type="text" value="`+Des+`" class="tag_dec"></td>`+select_word.replace('"'+group+'"','"'+group+'" selected')+`<td><button class="btn .btn-info" id="x_button">x</button></td>
+          <td><input type="text" value="`+Des+`" class="tag_dec"></td>`+select_word.replace('"'+group+'"','"'+group+'" selected')+chbox_word+`<td><button class="btn .btn-info" id="x_button">x</button></td>
         </tr>
         `);
 
@@ -234,10 +235,18 @@ function pre_alltagsave(){
         newtag = $(this).find('input')[0].value;
         newdes = $(this).find('input')[1].value;
         newgroup = $(this).find('select')[0].value;
+        // console.log($(this).find('#chbox').prop("checked"))
+        if($(this).find('#chbox').prop("checked")){
+          newactive = 1
+        }else{
+          newactive = 0
+        }
+        newactive = 
         output_tsv.push({
             tag:newtag ,
             Des:newdes ,
-            group:newgroup
+            group:newgroup ,
+            active:newactive
         })
     })
     console.log(output_tsv)
@@ -267,14 +276,20 @@ $(window).on('load',function(){
             <option value="sex">性行為</option>
             <option value="cum">射精</option>
             </select></td>`
+
         target = '#sortable_table'//セレクターで指定
         loadjson = JSON.parse(localStorage.getItem('tag'))
         // console.log(loadjson)
         loadjson.forEach(function(jsondata){
-
+    //チェックボックス変数作成
+          if(jsondata['active'] == 1){
+            chbox_word ='<td><input type="checkbox" id="chbox" checked></td>'
+          }else{
+            chbox_word ='<td><input type="checkbox" id="chbox"></td>'
+          }
             $(target).append(`<tr>
           <td><input type="text" value="`+jsondata['tag']+`" class="prompt_item"></td>
-          <td><input type="text" value="`+jsondata['Des']+`" class="tag_dec"></td>`+select_word.replace('"'+jsondata['group']+'"','"'+jsondata['group']+'" selected')+`<td><button class="btn .btn-info" id="x_button">x</button></td>
+          <td><input type="text" value="`+jsondata['Des']+`" class="tag_dec"></td>`+select_word.replace('"'+jsondata['group']+'"','"'+jsondata['group']+'" selected')+chbox_word+`<td><button class="btn .btn-info" id="x_button">x</button></td>
         </tr>
         `);
         // 所定のgroupになっていないものは置換が行われないのでユーザー定義として一括処理
@@ -293,6 +308,7 @@ $(window).on('load',function(){
         <th>tag(編集可能)</th>
         <th>説明文</th>
         <th>グループ</th>
+        <th>リスト表示</th>
         <th>削除</th>
       </thead>
       <tbody id="sortable_table">
