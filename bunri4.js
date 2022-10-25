@@ -28,7 +28,7 @@ function tagadds(prompts){
      //  jp_word = tag.trim();
     
       //詳細情報として表示させるHTMLを変数に代入する
-      content = '<tr><td><input type="text" value="'+pr_word+'" class="prompt_item"></td><td>'+pr_word+'</td><td><input type="number" value="'+weighting+'" class="counter1" data-max="500" data-min="0"></td><td><input type="checkbox" id="chbox" checked></td><td><button class="btn .btn-info" id="x_button">x</button></td></tr>';
+      content = '<tr><td><input type="text" value="'+pr_word+'" class="prompt_item"></td><td>'+pr_word+'</td><td><input type="number" value="'+weighting+'" class="counter1" data-max="500" data-min="0"></td><td><input type="checkbox" id="chbox" checked></td><td><input type="checkbox" id="chbox" checked></td><td><button class="btn .btn-info" id="x_button">x</button></td></tr>';
       $('#addtagbody').append(content);
       }
     
