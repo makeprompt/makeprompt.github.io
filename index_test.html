@@ -108,6 +108,7 @@
             <th>tag(編集可能)</th>
             <th>説明</th>
             <th>重みづけ</th>
+            <th>tag有効</th>
             <th>削除</th>
           </thead>
           <tbody id="addtagbody">
@@ -115,6 +116,7 @@
               <td><input type="text" value="1girl" class="prompt_item"></td>
               <td>1女</td>
               <td><input type="number" value="0" class="counter1" data-max="500" data-min="0"></td>
+              <td><input type="checkbox" id="chbox" checked></td>
               <td><button class="btn .btn-info" id="x_button">x</button></td>
             </tr> -->
           </tbody>
@@ -146,8 +148,7 @@
       <p>初回アクセス時にTaglistをキャッシュに読み込み、次回からはそのリストを利用します。Taglist編集のボタンから編集画面に入ることができますのでガンガン追加してJSONで共有してください。</p>
       <p>使い方の詳細は<a href="https://github.com/makeprompt/makeprompt.github.io">readme</a>を御覧ください</p> 
       <p>バグとか変な動作があったら<a href="https://github.com/makeprompt/makeprompt.github.io/issues" target="_blank">Issue</a>または<a href="https://twitter.com/EM2IZHDvgyRE8Tn" target="_blank">Twitter</a>に書き込みかメンションを飛ばしてください</p>
-      <h5>テストバージョン</h5>
-      <p><a href="./index_test.html">通常版と同じデータを使用したテストバージョン></a></p>
+
       <h5>謝辞</h5>
       <p>このツールは<a href="https://twitter.com/gyakuse" target="_blank">逆瀬川(@gyakuse)様</a>の<a href="https://t.co/b5E6FGIFea" target="_blank">Magic Generator</a>を参考としています。</p>
       <p>こちらで使用したい機能(すでに作成された呪文をいじる)をメインに無理やり実装しています。</p>
@@ -159,7 +160,7 @@
 <!-- test -->
 
 <!-- Script記載 後で分離 -->
-<script src="bunri3.js"></script>
+<script src="bunri4.js"></script>
 
 
 <script>
