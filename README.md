@@ -1,5 +1,6 @@
-# makeprompt.github.io
+# https://makeprompt.github.io
 prompt作成用 データはすべてlocalstorageに保存しますので、入力内容はサーバー等に保管していません。
+
 # 謝辞
 このツールは<a href="https://twitter.com/gyakuse" target="_blank">逆瀬川(@gyakuse)様</a>の<a href="https://t.co/b5E6FGIFea" target="_blank">Magic Generator</a>を参考として、個人的に使用したい機能(すでに作成された呪文をいじる)をメインに無理やり実装しています。
 # 使用方法
