@@ -184,7 +184,7 @@ $('#savetagjson').click(function(){
     const filename = "tag.json";
 
     //Blobでデータを作成する
-    const blob = new Blob([JSON.stringify(data)], { type: "text/csv" });
+    const blob = new Blob([JSON.stringify(data, null , "\t")], { type: "text/csv" });
 
     //IE10/11用(download属性が機能しないためmsSaveBlobを使用）
     if (window.navigator.msSaveBlob) {

@@ -242,7 +242,7 @@ function makejson(){
     const filename = "prompts.json";
 
     //Blobでデータを作成する
-    const blob = new Blob([JSON.stringify(output_tsv)], { type: "text/csv" });
+    const blob = new Blob([JSON.stringify(output_tsv, null , "\t")], { type: "text/csv" });
 
     //IE10/11用(download属性が機能しないためmsSaveBlobを使用）
     if (window.navigator.msSaveBlob) {
