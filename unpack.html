@@ -7,13 +7,13 @@
   </head>
   <body>
     <label for="packed">/packer/でBase62エンコードされたJavaScript:</label>
-    <textarea
+    <div>
+      <textarea
       id="packed"
       name="packed"
       rows="10"
-      cols="80"
-
-    ></textarea>
+      cols="80"></textarea>
+    </div><div>
     <textarea
       id="unpacked"
       name="packed"
@@ -21,10 +21,11 @@
       cols="80"
 
     ></textarea>
-
+</div>
     <p id="message">Ready</p>
 
     <button id="decode-script">Decode</button>
+    <button id="decode-script-v2">Decode-v2</button>
 
     <script>
       document.getElementById("decode-script").onclick = function () {
@@ -37,6 +38,17 @@
           document.getElementById("message").innerText = e;
         }
       };
+      document.getElementById("decode-script-v2").onclick = function () { 
+  const value = document.getElementById("packed").value;
+  if (!value) return;
+  try {
+    eval("packed.value=String" + value.slice(4));
+    document.getElementById("message").innerText = "Success!";
+    document.getElementById("unpack").value = value.slice(4);  // unpackテキストボックスに値を設定
+  } catch (e) {
+    document.getElementById("message").innerText = e;
+  }
+};
     </script>
   </body>
 </html>
