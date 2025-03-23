@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Static Template</title>
+  </head>
+  <body>
+    <label for="packed">/packer/でBase62エンコードされたJavaScript:</label>
+    <textarea
+      id="packed"
+      name="packed"
+      rows="10"
+      cols="80"
+
+    ></textarea>
+    <textarea
+      id="unpacked"
+      name="packed"
+      rows="10"
+      cols="80"
+
+    >
+
+    <p id="message">Ready</p>
+
+    <button id="decode-script">Decode</button>
+
+    <script>
+      document.getElementById("decode-script").onclick = function () {
+        const value = document.getElementById("packed").value;
+        if (!value) return;
+        try {
+          eval("packed.value=String" + value.slice(4));
+          document.getElementById("message").innerText = "Success!";
+        } catch (e) {
+          document.getElementById("message").innerText = e;
+        }
+      };
+    </script>
+  </body>
+</html>
